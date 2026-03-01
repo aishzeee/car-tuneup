@@ -32,6 +32,12 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    max-width: 100vw;
+}
+
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 h1,
@@ -1439,7 +1445,9 @@ footer {
 /* Comprehensive Mobile Responsiveness Fixes */
 @media (max-width: 768px) {
     .container {
-        padding: 0 15px !important;
+        padding: 0 5% !important;
+        /* 5% gives consistent side margins */
+        max-width: 100%;
     }
 
     .hero {
@@ -1447,14 +1455,17 @@ footer {
     }
 
     .hero h1 {
-        font-size: 2.2rem !important;
+        font-size: 2rem !important;
+        /* 32px */
         line-height: 1.25 !important;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     .hero p {
-        font-size: 1rem !important;
+        font-size: 0.938rem !important;
+        /* 15px */
         line-height: 1.6 !important;
+        margin-bottom: 2rem;
     }
 
     .hero-btns {
@@ -1467,7 +1478,21 @@ footer {
     .hero-btns .btn {
         width: 100%;
         box-sizing: border-box;
-        padding: 1rem;
+        padding: 1.2rem;
+        /* Better scaling for mobile */
+        font-size: 1.05rem;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+        /* 24px */
+        line-height: 1.3 !important;
+    }
+
+    p {
+        font-size: 0.938rem;
+        /* 15px */
+        line-height: 1.6;
     }
 
     .certified-tech-bar {
@@ -1509,4 +1534,53 @@ footer {
         font-size: 4rem;
         margin-bottom: 1rem;
     }
+}
+/* --- Mobile & Desktop Optimization --- */
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Adaptive Fonts for Mobile */
+    h1, .hero h1 {
+        font-size: 28px !important; 
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
+    }
+
+    h2, .hero h2 {
+        font-size: 22px !important;
+    }
+
+    p, .hero p {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Button Stacking for Mobile */
+    .hero-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: center !important;
+    }
+
+    .hero-buttons a, .btn {
+        width: 100% !important;
+        max-width: 280px;
+        text-align: center;
+        padding: 12px !important;
+    }
+}
+
+/* --- Clean Up --- */
+
+/* Removes the stray dot behind 'Computerized Tune-up Expert' */
+.tune-up-expert::before, 
+.tune-up-expert::after,
+.expert-tag::before {
+    content: none !important;
+    display: none !important;
 }
