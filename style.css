@@ -343,14 +343,14 @@ nav.scrolled {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
-    min-height: 800px;
+    height: auto;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding-top: 80px;
+    padding-top: 120px;
     z-index: 10;
 }
 
@@ -1117,7 +1117,7 @@ footer {
 
 @media (max-width: 1024px) {
     .hero h1 {
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
 
     .hero-stats {
@@ -1439,7 +1439,7 @@ footer {
 /* Comprehensive Mobile Responsiveness Fixes */
 @media (max-width: 768px) {
     .container {
-        padding: 0 20px !important;
+        padding: 0 15px !important;
     }
 
     .hero {
@@ -1447,8 +1447,8 @@ footer {
     }
 
     .hero h1 {
-        font-size: 2.5rem !important;
-        line-height: 1.2 !important;
+        font-size: 2.2rem !important;
+        line-height: 1.25 !important;
         margin-bottom: 1rem;
     }
 
@@ -1458,6 +1458,7 @@ footer {
     }
 
     .hero-btns {
+        display: flex;
         flex-direction: column;
         width: 100%;
         gap: 1rem;
@@ -1465,6 +1466,8 @@ footer {
 
     .hero-btns .btn {
         width: 100%;
+        box-sizing: border-box;
+        padding: 1rem;
     }
 
     .certified-tech-bar {
