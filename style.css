@@ -426,7 +426,9 @@ nav.scrolled {
 .hero-tagline::after,
 .hero-tagline::marker {
     display: none !important;
-    content: "" !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* New Certified Tech Bar */
@@ -446,6 +448,7 @@ nav.scrolled {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
     gap: 15px;
     padding: 1.2rem 4rem;
     font-size: 1.6rem;
@@ -1400,16 +1403,17 @@ footer {
     font-size: 2rem;
     color: var(--accent);
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 0.8rem;
     font-family: 'Montserrat', sans-serif;
+    line-height: 1.4;
 }
 
 .wa-desc {
     color: var(--text-muted);
     font-size: 1.15rem;
-    letter-spacing: 1px;
-    line-height: 1.6;
+    letter-spacing: 1.5px;
+    line-height: 1.8;
 }
 
 /* Typography Spacing Fixes (Full Page Consistency) */
@@ -1430,4 +1434,76 @@ footer {
 .edu-grid {
     gap: 6rem;
     /* Increase gap to avoid cramped feeling */
+}
+
+/* Comprehensive Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px !important;
+    }
+
+    .hero {
+        padding-top: 100px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-btns .btn {
+        width: 100%;
+    }
+
+    .certified-tech-bar {
+        padding: 2rem 0;
+    }
+
+    .certified-badge-prominent {
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsapp-banner {
+        padding: 3rem 0;
+    }
+
+    .wa-large-link {
+        padding: 2rem 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .wa-title {
+        font-size: 2.2rem;
+    }
+
+    .wa-number {
+        font-size: 1.5rem;
+    }
+
+    .wa-huge-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
 }
