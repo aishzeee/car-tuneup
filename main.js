@@ -160,42 +160,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const calcResultVal = document.getElementById('calc-result-val');
 
     if (calcBtn && calcCurrent && calcTarget && calcDistance && calcPrice && calcResultVal) {
-        // Automatically calculate a baseline target based on ~60% improvement (as displayed in results section)
+
+        // Auto-update target average dynamically based on current average (60% improvement)
         calcCurrent.addEventListener('input', () => {
-            const current = parseFloat(calcCurrent.value) || 0;
-            if (current > 0) {
+            const current = parseFloat(calcCurrent.value);
+            if (!isNaN(current) && current > 0) {
                 calcTarget.value = (current * 1.6).toFixed(1).replace(/\.0$/, '');
             } else {
                 calcTarget.value = '';
             }
         });
 
-        calcBtn.addEventListener('click', () => {
-            const currentAvg = parseFloat(calcCurrent.value) || 0;
-            const targetAvg = parseFloat(calcTarget.value) || 0;
-            const distance = parseFloat(calcDistance.value) || 0;
-            const price = parseFloat(calcPrice.value) || 0;
+        // The main calculation function
+        const calculateSavings = () => {
+            const currentAvg = parseFloat(calcCurrent.value);
+            const targetAvg = parseFloat(calcTarget.value);
+            const commute = parseFloat(calcDistance.value);
+            const price = parseFloat(calcPrice.value);
 
-            if (currentAvg > 0 && targetAvg > 0 && distance > 0 && price > 0) {
-                const currentCost = (distance / currentAvg) * price;
-                const targetCost = (distance / targetAvg) * price;
-                let savings = currentCost - targetCost;
+            // Data Validation: Must not be empty/zero, and target_avg must be greater than current_avg
+            if (
+                !isNaN(currentAvg) && currentAvg > 0 &&
+                !isNaN(targetAvg) && targetAvg > 0 &&
+                !isNaN(commute) && commute > 0 &&
+                !isNaN(price) && price > 0 &&
+                targetAvg > currentAvg
+            ) {
+                // The Logic (Formula)
+                const currentLiters = commute / currentAvg;
+                const targetLiters = commute / targetAvg;
+                const savings = (currentLiters - targetLiters) * price;
 
-                if (savings < 0) savings = 0;
+                // Formatting: Add commas
+                const formattedSavings = Math.round(savings).toLocaleString('en-US');
 
-                // Format with commas and no decimals
-                let formattedSavings = new Intl.NumberFormat('en-US').format(Math.round(savings));
-                calcResultVal.innerText = formattedSavings;
+                // UI Integration & Fade-in Animation
+                if (calcResultVal.innerText !== formattedSavings) {
+                    calcResultVal.style.transition = 'opacity 0.1s ease-out';
+                    calcResultVal.style.opacity = '0';
+                    setTimeout(() => {
+                        calcResultVal.innerText = formattedSavings;
+                        calcResultVal.style.transition = 'opacity 0.4s ease-in, transform 0.2s ease-in-out';
+                        calcResultVal.style.opacity = '1';
+                        calcResultVal.style.transform = 'scale(1.1)';
 
-                // Add a small animation effect on result
-                calcResultVal.style.transition = 'transform 0.2s ease-in-out';
-                calcResultVal.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    calcResultVal.style.transform = 'scale(1)';
-                }, 200);
+                        setTimeout(() => {
+                            calcResultVal.style.transform = 'scale(1)';
+                        }, 200);
+                    }, 100);
+                }
             } else {
                 calcResultVal.innerText = "0";
             }
+        };
+
+        // Event Listeners: Trigger calculation automatically when inputs change
+        const inputs = [calcCurrent, calcTarget, calcDistance, calcPrice];
+        inputs.forEach(input => {
+            input.addEventListener('input', calculateSavings);
         });
+
+        // Trigger on "Calculate Savings" button click as well
+        calcBtn.addEventListener('click', calculateSavings);
     }
 });
