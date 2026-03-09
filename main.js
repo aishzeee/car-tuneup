@@ -150,4 +150,52 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Fuel Savings Calculator Logic
+    const calcBtn = document.getElementById('calc-btn');
+    const calcCurrent = document.getElementById('calc-current');
+    const calcTarget = document.getElementById('calc-target');
+    const calcDistance = document.getElementById('calc-distance');
+    const calcPrice = document.getElementById('calc-price');
+    const calcResultVal = document.getElementById('calc-result-val');
+
+    if (calcBtn && calcCurrent && calcTarget && calcDistance && calcPrice && calcResultVal) {
+        // Automatically calculate a baseline target based on ~60% improvement (as displayed in results section)
+        calcCurrent.addEventListener('input', () => {
+            const current = parseFloat(calcCurrent.value) || 0;
+            if (current > 0) {
+                calcTarget.value = (current * 1.6).toFixed(1).replace(/\.0$/, '');
+            } else {
+                calcTarget.value = '';
+            }
+        });
+
+        calcBtn.addEventListener('click', () => {
+            const currentAvg = parseFloat(calcCurrent.value) || 0;
+            const targetAvg = parseFloat(calcTarget.value) || 0;
+            const distance = parseFloat(calcDistance.value) || 0;
+            const price = parseFloat(calcPrice.value) || 0;
+
+            if (currentAvg > 0 && targetAvg > 0 && distance > 0 && price > 0) {
+                const currentCost = (distance / currentAvg) * price;
+                const targetCost = (distance / targetAvg) * price;
+                let savings = currentCost - targetCost;
+
+                if (savings < 0) savings = 0;
+
+                // Format with commas and no decimals
+                let formattedSavings = new Intl.NumberFormat('en-US').format(Math.round(savings));
+                calcResultVal.innerText = formattedSavings;
+
+                // Add a small animation effect on result
+                calcResultVal.style.transition = 'transform 0.2s ease-in-out';
+                calcResultVal.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    calcResultVal.style.transform = 'scale(1)';
+                }, 200);
+            } else {
+                calcResultVal.innerText = "0";
+            }
+        });
+    }
 });

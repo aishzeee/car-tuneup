@@ -1535,6 +1535,7 @@ footer {
         margin-bottom: 1rem;
     }
 }
+
 /* --- Mobile & Desktop Optimization --- */
 
 @media (max-width: 768px) {
@@ -1544,17 +1545,20 @@ footer {
     }
 
     /* Adaptive Fonts for Mobile */
-    h1, .hero h1 {
-        font-size: 28px !important; 
+    h1,
+    .hero h1 {
+        font-size: 28px !important;
         line-height: 1.2 !important;
         margin-bottom: 15px !important;
     }
 
-    h2, .hero h2 {
+    h2,
+    .hero h2 {
         font-size: 22px !important;
     }
 
-    p, .hero p {
+    p,
+    .hero p {
         font-size: 14px !important;
         line-height: 1.6 !important;
     }
@@ -1567,7 +1571,8 @@ footer {
         align-items: center !important;
     }
 
-    .hero-buttons a, .btn {
+    .hero-buttons a,
+    .btn {
         width: 100% !important;
         max-width: 280px;
         text-align: center;
@@ -1578,9 +1583,43 @@ footer {
 /* --- Clean Up --- */
 
 /* Removes the stray dot behind 'Computerized Tune-up Expert' */
-.tune-up-expert::before, 
+.tune-up-expert::before,
 .tune-up-expert::after,
 .expert-tag::before {
     content: none !important;
     display: none !important;
+}
+
+/* Floating WhatsApp Button */
+.floating-wa {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2.2rem;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    transition: var(--transition);
+}
+
+.floating-wa:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+}
+
+@media (max-width: 768px) {
+    .floating-wa {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
 }
